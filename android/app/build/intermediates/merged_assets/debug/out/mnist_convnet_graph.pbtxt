@@ -1,0 +1,5526 @@
+library {
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_8784"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 10000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_3148"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "N\000\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 16
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 16
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_5993"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_8747"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "\324\001\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 96
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 96
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_5902"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+      is_stateful: true
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 60000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "RandomShuffle"
+      op: "RandomShuffle"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "seed"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "seed2"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "RandomShuffle:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_5957"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 10000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_8765"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_8802"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "N\000\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 16
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 16
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_8820"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_3130"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 10000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_284"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_248"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+      is_stateful: true
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 60000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "RandomShuffle"
+      op: "RandomShuffle"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "seed"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "seed2"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "RandomShuffle:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_321"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "N\000\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 16
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 16
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_339"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_8729"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+      is_stateful: true
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 60000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "RandomShuffle"
+      op: "RandomShuffle"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "seed"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "seed2"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "RandomShuffle:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_3166"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_5938"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_266"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "\324\001\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 96
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 96
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_grab_batch_3111"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      input_arg {
+        name: "args_1"
+        type: DT_FLOAT
+      }
+      input_arg {
+        name: "args_2"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity"
+        type: DT_FLOAT
+      }
+      output_arg {
+        name: "identity_1"
+        type: DT_FLOAT
+      }
+    }
+    node_def {
+      name: "GatherV2/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2"
+      op: "GatherV2"
+      input: "args_1"
+      input: "args_0"
+      input: "GatherV2/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1/axis"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "GatherV2_1"
+      op: "GatherV2"
+      input: "args_2"
+      input: "args_0"
+      input: "GatherV2_1/axis:output:0"
+      attr {
+        key: "Taxis"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Tindices"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tparams"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "batch_dims"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "GatherV2:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    node_def {
+      name: "Identity_1"
+      op: "Identity"
+      input: "GatherV2_1:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    ret {
+      key: "identity_1"
+      value: "Identity_1:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 1
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_1"
+          }
+        }
+      }
+    }
+    arg_attr {
+      key: 2
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_2"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_5975"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "N\000\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 9984
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 16
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 16
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_303"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 10000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_3093"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "\324\001\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 96
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 96
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_flat_map_slice_batch_indices_5920"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_VARIANT
+      }
+      is_stateful: true
+      control_output: "TensorDataset"
+      control_output: "TensorSliceDataset"
+    }
+    node_def {
+      name: "Slice/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice/begin:output:0"
+      input: "Slice/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "Reshape/shape"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 2
+              }
+            }
+            tensor_content: "\324\001\000\000\200\000\000\000"
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Reshape"
+      op: "Reshape"
+      input: "Slice:output:0"
+      input: "Reshape/shape:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "Tshape"
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    node_def {
+      name: "TensorSliceDataset"
+      op: "TensorSliceDataset"
+      input: "Reshape:output:0"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 128
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/begin"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 59904
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1/size"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+              dim {
+                size: 1
+              }
+            }
+            int_val: 96
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Slice_1"
+      op: "Slice"
+      input: "args_0"
+      input: "Slice_1/begin:output:0"
+      input: "Slice_1/size:output:0"
+      attr {
+        key: "Index"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "TensorDataset"
+      op: "TensorDataset"
+      input: "Slice_1:output:0"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "Toutput_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: 96
+              }
+            }
+          }
+        }
+      }
+    }
+    node_def {
+      name: "ConcatenateDataset"
+      op: "ConcatenateDataset"
+      input: "TensorSliceDataset:handle:0"
+      input: "TensorDataset:handle:0"
+      attr {
+        key: "output_shapes"
+        value {
+          list {
+            shape {
+              dim {
+                size: -1
+              }
+            }
+          }
+        }
+      }
+      attr {
+        key: "output_types"
+        value {
+          list {
+            type: DT_INT64
+          }
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "ConcatenateDataset:handle:0"
+      input: "^TensorDataset"
+      input: "^TensorSliceDataset"
+      attr {
+        key: "T"
+        value {
+          type: DT_VARIANT
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    control_ret {
+      key: "TensorDataset"
+      value: "TensorDataset"
+    }
+    control_ret {
+      key: "TensorSliceDataset"
+      value: "TensorSliceDataset"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: "__inference_Dataset_map_permutation_3075"
+      input_arg {
+        name: "args_0"
+        type: DT_INT64
+      }
+      output_arg {
+        name: "identity"
+        type: DT_INT64
+      }
+      is_stateful: true
+    }
+    node_def {
+      name: "range/start/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/start"
+      op: "Cast"
+      input: "range/start/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/limit/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 60000
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/limit"
+      op: "Cast"
+      input: "range/limit/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range/delta/x"
+      op: "Const"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "value"
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 1
+          }
+        }
+      }
+    }
+    node_def {
+      name: "range/delta"
+      op: "Cast"
+      input: "range/delta/x:output:0"
+      attr {
+        key: "DstT"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "SrcT"
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: "Truncate"
+        value {
+          b: false
+        }
+      }
+    }
+    node_def {
+      name: "range"
+      op: "Range"
+      input: "range/start:y:0"
+      input: "range/limit:y:0"
+      input: "range/delta:y:0"
+      attr {
+        key: "Tidx"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    node_def {
+      name: "RandomShuffle"
+      op: "RandomShuffle"
+      input: "range:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+      attr {
+        key: "seed"
+        value {
+          i: 0
+        }
+      }
+      attr {
+        key: "seed2"
+        value {
+          i: 0
+        }
+      }
+    }
+    node_def {
+      name: "Identity"
+      op: "Identity"
+      input: "RandomShuffle:output:0"
+      attr {
+        key: "T"
+        value {
+          type: DT_INT64
+        }
+      }
+    }
+    ret {
+      key: "identity"
+      value: "Identity:output:0"
+    }
+    arg_attr {
+      value {
+        attr {
+          key: "_user_specified_name"
+          value {
+            s: "args_0"
+          }
+        }
+      }
+    }
+  }
+}
+versions {
+  producer: 119
+  min_consumer: 12
+}
